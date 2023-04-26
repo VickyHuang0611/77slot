@@ -1,3 +1,4 @@
+
 const cache = {};
 
 export default class Symbol {
@@ -22,17 +23,22 @@ export default class Symbol {
     return [
       "at_at",
       "c3po",
-      "darth_vader",
-      "death_star",
-      "falcon",
-      "r2d2",
-      "stormtrooper",
-      "tie_ln",
-      "yoda",
+      "c3po",
+      // "darth_vader",
+      // "death_star",
+      // "falcon",
+      // "r2d2",
+      // "stormtrooper",
+      // "tie_ln",
+      // "yoda",
     ];
   }
 
   static random() {
     return this.symbols[Math.floor(Math.random() * this.symbols.length)];
   }
+
+  // static randomv2() {
+  //   return this.symbols[Math.floor(Math.random() * this.symbols.length)];
+  // }
 }

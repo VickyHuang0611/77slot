@@ -4,11 +4,12 @@ export default class Reel {
   constructor(reelContainer, idx, initialSymbols) {
     this.reelContainer = reelContainer;
     this.idx = idx;
+    this.aa;
 
     this.symbolContainer = document.createElement("div");
     this.symbolContainer.classList.add("icons");
     this.reelContainer.appendChild(this.symbolContainer);
-
+    console.log(this.symbolContainer)
     this.animation = this.symbolContainer.animate(
       [
         { transform: "none", filter: "blur(0)" },
@@ -21,6 +22,7 @@ export default class Reel {
           }%)`,
           filter: "blur(0)",
         },
+
       ],
       {
         duration: this.factor * 1000,
@@ -52,8 +54,10 @@ export default class Reel {
           : undefined
       );
       fragment.appendChild(icon.img);
+      console.log(icon.img)
+      this.aa = icon.img;
     }
-
+    
     this.symbolContainer.appendChild(fragment);
   }
 
@@ -71,7 +75,6 @@ export default class Reel {
       if (this.animation.playState !== "finished") this.animation.finish();
 
       const max = this.symbolContainer.children.length - 3;
-      console.log(this.symbolContainer.children.length)
 
       for (let i = 0; i < max; i++) {
         this.symbolContainer.firstChild.remove();
