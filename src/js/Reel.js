@@ -9,7 +9,7 @@ export default class Reel {
     this.symbolContainer = document.createElement("div");
     this.symbolContainer.classList.add("icons");
     this.reelContainer.appendChild(this.symbolContainer);
-    console.log(this.symbolContainer)
+    // console.log(this.symbolContainer)
     this.animation = this.symbolContainer.animate(
       [
         { transform: "none", filter: "blur(0)" },
@@ -54,7 +54,7 @@ export default class Reel {
           : undefined
       );
       fragment.appendChild(icon.img);
-      console.log(icon.img)
+      // console.log(icon.img)
       this.aa = icon.img;
     }
     
