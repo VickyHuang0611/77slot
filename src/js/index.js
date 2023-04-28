@@ -1,20 +1,26 @@
 import Slot from "./Slot.js";
 import {Symbol, Jeff} from "./Symbol.js";
+import audioFile from '../assets/audio/slot.mp3';
 
 let name;
 
 const config = {
   inverted: false, // true: reels spin from top to bottom; false: reels spin from bottom to top
   onSpinStart: (symbols) => {
-    console.log("onSpinStart", symbols);
+  const audio = document.getElementById("autoplay");
+  audio.load();
+  audio.play();
+    // console.log("onSpinStart", symbols);
   },
   onSpinEnd: (symbols) => {
     console.log("onSpinEnd", symbols);
-    console.log(symbols[0][0], symbols[1][0], symbols[2][0]);
+    // console.log(symbols[0][0], symbols[1][0], symbols[2][0]);
     if (symbols[0][0] == symbols[1][0] && symbols[1][0] == symbols[2][0]) {
       name = symbols[0][0];
       win();
     }
+    const audio = document.getElementById("autoplay");
+    audio.pause();
   },
 };
 

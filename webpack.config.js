@@ -3,6 +3,7 @@ const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   // 入口文件
@@ -28,6 +29,16 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "main.[contenthash].css",
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'src/assets',
+          to: 'assets',
+          globOptions: {
+          },
+        },
+      ],
+    }),
   ],
   module: {
     rules: [
@@ -36,7 +47,7 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif|svg|mp3)$/,
         type: "asset/resource",
       },
       {
@@ -44,6 +55,13 @@ module.exports = {
         exclude: /node_modules/,
         use: "babel-loader",
       },
+      {
+        test: /\.mp3$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/audio/[name].[ext]?[hash]'
+        }
+      }
       
     ],
   },
