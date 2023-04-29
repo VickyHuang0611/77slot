@@ -35,12 +35,12 @@ export default class Symbol {
   }
 
   static random() {
-    console.log(this.symbols[Math.floor(Math.random() * this.symbols.length)]);
+    // console.log(this.symbols[Math.floor(Math.random() * this.symbols.length)]);
     return this.symbols[Math.floor(Math.random() * this.symbols.length)];
   }
 
   static get getDic() {
-    console.log(window.dic[key]);
+    // console.log(window.dic[key]);
     return window.dic[key];
   }
 
@@ -72,7 +72,7 @@ export class Jeff {
     var item = localStorage.getItem('cat');
     var obj = JSON.parse(item);
 
-    console.log(key + obj);
+    // console.log(key + obj);
     return obj[key];
   }
 }

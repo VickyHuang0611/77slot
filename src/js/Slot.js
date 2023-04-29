@@ -38,13 +38,7 @@ export default class Slot {
 
   spin() {
     this.currentSymbols = this.nextSymbols;
-    this.nextSymbols = [
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-    ];
+    this.nextSymbols = this.getNextSymbols();
 
     this.onSpinStart(this.nextSymbols);
 
@@ -70,5 +64,78 @@ export default class Slot {
     // if (this.autoPlayCheckbox.checked) {
     //   return window.setTimeout(() => this.spin(), 200);
     // }
+  }
+
+  // 渲染下一次中獎
+  getNextSymbols() {
+    // 中獎獎項
+    let award = this.getAwards();
+    // console.log("key" + award.key);
+    let r = award.key
+      ? [
+          [award.name, "at_at", "at_at"],
+          [award.name, "at_at", "at_at"],
+          [award.name, "at_at", "at_at"],
+        ]
+      : [
+          [award.name, Symbol.random(), Symbol.random()],
+          [award.notMapName, Symbol.random(), Symbol.random()],
+          [Symbol.random(), Symbol.random(), Symbol.random()],
+          ];
+    if (award.key) {
+      console.log("===中獎===" + award.name);
+      console.log("===中獎1===", award);
+    } else {
+      
+      console.log("未中獎", r);
+      console.log("未中獎1", award);
+    }
+    return r;
+  }
+
+  // 取得獎項
+  getAwards() {
+    // 可中獎獎項以及機率
+    let setDefaultSymbols = [
+      { name: "at_at", probability: 50 },
+      { name: "c3po", probability: 10 },
+    ];
+
+    let array = [];
+
+    // 填入中獎資料
+    setDefaultSymbols.map((item) => {
+      for (let i = 0; i < item.probability; i++) {
+        array.push({ key: true, name: item.name });
+      }
+    });
+
+    // 填入未中獎機率
+    let total = 100 - array.length;
+    for (let i = 0; i < total; i++) {
+      let mapName = Symbol.random();
+      array.push({
+        key: false,
+        name: mapName,
+        notMapName: this.getNotMapName(mapName),
+      });
+    }
+
+    // let json = JSON.stringify(array);
+    // console.log('get array '+ json);
+    // console.log('get floor' +Math.floor(Math.random() * 100));
+    let randomCount = Math.floor(Math.random() * array.length);
+    let result = array[randomCount];
+    console.clear();
+    return result;
+  }
+
+  getNotMapName(name) {
+    for (let i = 0; i < 100000; i++) {
+      let mapName = Symbol.random();
+      if (mapName != name) {
+        return mapName;
+      }
+    }
   }
 }

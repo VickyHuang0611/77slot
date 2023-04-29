@@ -13,10 +13,11 @@ const config = {
     // console.log("onSpinStart", symbols);
   },
   onSpinEnd: (symbols) => {
-    console.log("onSpinEnd", symbols);
+    // console.log("onSpinEnd", symbols);
     // console.log(symbols[0][0], symbols[1][0], symbols[2][0]);
     if (symbols[0][0] == symbols[1][0] && symbols[1][0] == symbols[2][0]) {
       name = symbols[0][0];
+      console.log('get name' + name);
       win();
     }
     const audio = document.getElementById("autoplay");
